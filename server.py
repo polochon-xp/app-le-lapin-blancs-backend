@@ -138,11 +138,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
+    allow_origins=["*"],  # autorise toutes les origines (test seulement)
     allow_credentials=True,
-    allow_methods=["*"],  # toutes les méthodes HTTP autorisées
-    allow_headers=["*"],  # tous les headers autorisés
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 
 # Create a router with the /api prefix
