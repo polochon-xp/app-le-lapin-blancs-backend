@@ -134,6 +134,17 @@ SPECIAL_TITLES_DATA = [
 # Create the main app without a prefix
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],  # Remplace * par "https://ton-frontend.vercel.app" pour plus de sécurité
+    allow_credentials=True,
+    allow_methods=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
+    allow_headers=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
+
+)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
@@ -830,8 +841,13 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+    
+@app.get("/")
+def read_root():
+    return {"message": "API is alive"}
+    
 
-
+app.include_router(api_router)
 
 
 
