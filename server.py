@@ -138,12 +138,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],  # Remplace * par "https://ton-frontend.vercel.app" pour plus de sécurité
+    allow_origins=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
     allow_credentials=True,
-    allow_methods=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
-    allow_headers=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],
-
+    allow_methods=["*"],  # toutes les méthodes HTTP autorisées
+    allow_headers=["*"],  # tous les headers autorisés
 )
+
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
