@@ -846,7 +846,6 @@ def read_root():
     return {"message": "API is alive"}
     
 
-app.include_router(api_router)
 
 
 
