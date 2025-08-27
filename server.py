@@ -136,14 +136,19 @@ app = FastAPI()
 
 from fastapi.middleware.cors import CORSMiddleware
 
+# Dans server.py - SUPPRIMER la duplication et corriger :
+
+# Remplacer les deux middlewares CORS par UN SEUL :
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app"],  # ton frontend Vercel
+    allow_origins=[
+        "https://app-le-lapin-blanc-fcynx1azv-polochon-xps-projects.vercel.app",
+        "http://localhost:3000"  # pour le dev local
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
-
 
 
 # Create a router with the /api prefix
@@ -824,13 +829,6 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Configure logging
 logging.basicConfig(
